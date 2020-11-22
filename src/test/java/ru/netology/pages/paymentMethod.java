@@ -21,8 +21,8 @@ public class paymentMethod {
         return new BuyGate();
     }
 
-//    public CreditPage goToCreditPage() {
-//        creditButton.click();
-//        return new CreditPage();
-//    }
+    public CreditGate goToCreditPage() {
+        creditButton.click();
+        return new CreditGate();
+    }
 }
