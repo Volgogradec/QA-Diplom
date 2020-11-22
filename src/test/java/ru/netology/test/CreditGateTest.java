@@ -47,7 +47,7 @@ public class CreditGateTest {
         val startPage = new paymentMethod();
         val payment = startPage.goToCreditPage();
         payment.inputData(DataHelper.getDeclinedCard());
-        payment.waitNotificationApproved();
+        payment.waitNotificationFailure();
         assertEquals("DECLINED", SqlHelper.getCreditRequestStatus());
     }
 

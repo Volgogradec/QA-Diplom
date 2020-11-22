@@ -47,7 +47,7 @@ public class BuyGateTest {
         val startPage = new paymentMethod();
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getDeclinedCard());
-        payment.waitNotificationApproved();
+        payment.waitNotificationFailure();
         assertEquals("DECLINED", SqlHelper.getPaymentStatus());
     }
 
