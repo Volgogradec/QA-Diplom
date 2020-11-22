@@ -5,6 +5,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DataHelper;
+import ru.netology.data.SqlHelper;
 import ru.netology.pages.paymentMethod;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -13,8 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BuyGateTest {
     @BeforeEach
     public void openPage() {
-        String url = "http://localhost:8080";
+        String url = System.getProperty("sut.url");
         open(url);
+    }
+
+    @AfterEach
+    public void cleanBase() {
+        SqlHelper.clearDB();
     }
 
     @BeforeAll
@@ -28,12 +34,21 @@ public class BuyGateTest {
     }
 
     @Test
-    void buyPositiveAllFieldValid() {
+    void buyPositiveAllFieldValidApproved() {
         val startPage = new paymentMethod();
         val payment = startPage.goToBuyPage();
-        payment.inputData(DataHelper.getValidCard());
+        payment.inputData(DataHelper.getApprovedCard());
         payment.waitNotificationApproved();
-        assertEquals("OK", "OK");
+        assertEquals("APPROVED", SqlHelper.getPaymentStatus());
+    }
+
+    @Test
+    void buyPositiveAllFieldValidDeclined() {
+        val startPage = new paymentMethod();
+        val payment = startPage.goToBuyPage();
+        payment.inputData(DataHelper.getDeclinedCard());
+        payment.waitNotificationApproved();
+        assertEquals("DECLINED", SqlHelper.getPaymentStatus());
     }
 
     @Test
@@ -42,6 +57,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getEmptyCard());
         payment.waitNotificationWrongFormat4Fields();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -50,6 +66,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getNumberCard15Symbols());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -58,6 +75,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardNotInDatabase());
         payment.waitNotificationFailure();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -66,6 +84,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardMonth1Symbol());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -74,6 +93,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardMonthOver12());
         payment.waitNotificationExpirationDateError();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -82,6 +102,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardMonth00ThisYear());
         payment.waitNotificationExpirationDateError();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -90,6 +111,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardMonth00OverThisYear());
         payment.waitNotificationExpirationDateError();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -98,6 +120,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardYear00());
         payment.waitNotificationExpiredError();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -106,6 +129,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardYear1Symbol());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -114,6 +138,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardYearUnderThisYear());
         payment.waitNotificationExpiredError();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -122,6 +147,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardYearOverThisYearOn6());
         payment.waitNotificationExpirationDateError();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -130,6 +156,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardCvv1Symbol());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -138,6 +165,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardCvv2Symbols());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -146,6 +174,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardHolder1Word());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -154,6 +183,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardHolderCirillic());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -162,6 +192,7 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardHolderNumeric());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 
     @Test
@@ -170,5 +201,6 @@ public class BuyGateTest {
         val payment = startPage.goToBuyPage();
         payment.inputData(DataHelper.getCardSpecialSymbols());
         payment.waitNotificationWrongFormat();
+        assertEquals("0", SqlHelper.getOrderCount());
     }
 }

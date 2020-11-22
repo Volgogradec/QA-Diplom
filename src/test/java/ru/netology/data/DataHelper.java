@@ -8,8 +8,12 @@ import java.util.Locale;
 
 public class DataHelper {
 
-    public static Card getValidCard() {
+    public static Card getApprovedCard() {
         return new Card("4444444444444441", "11", "20", "Dmitry Evdokimov", "123");
+    }
+
+    public static Card getDeclinedCard() {
+        return new Card("4444444444444442", "11", "20", "Dmitry Evdokimov", "123");
     }
 
     public static Card getEmptyCard() {
