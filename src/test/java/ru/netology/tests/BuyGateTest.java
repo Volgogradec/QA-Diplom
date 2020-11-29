@@ -12,9 +12,10 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BuyGateTest {
+    public static String url = System.getProperty("sut.url");
+
     @BeforeEach
     public void openPage() {
-        String url = System.getProperty("sut.url");
         open(url);
     }
 
