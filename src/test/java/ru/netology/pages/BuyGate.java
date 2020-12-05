@@ -41,28 +41,28 @@ public class BuyGate {
     }
 
     public void waitNotificationApproved() {
-        approvedOperation.waitUntil(visible, 10000);
+        approvedOperation.waitUntil(visible, 15000);
         cancelField.click();
     }
 
     public void waitNotificationFailure() {
-        failureOperation.waitUntil(visible, 10000);
+        failureOperation.waitUntil(visible, 15000);
     }
 
     public void waitNotificationWrongFormat() {
-        wrongFormatError.waitUntil(visible, 10000);
+        wrongFormatError.waitUntil(visible, 15000);
     }
 
     public void waitNotificationExpirationDateError() {
-        cardExpirationDateError.waitUntil(visible, 10000);
+        cardExpirationDateError.waitUntil(visible, 15000);
     }
 
     public void waitNotificationExpiredError() {
-        cardExpiredError.waitUntil(visible, 10000);
+        cardExpiredError.waitUntil(visible, 15000);
     }
 
     public void waitNotificationWrongFormat4Fields() {
         wrongFormat4Error.shouldHaveSize(4);
-        requiredFieldError.waitUntil(visible, 10000);
+        requiredFieldError.waitUntil(visible, 15000);
     }
 }

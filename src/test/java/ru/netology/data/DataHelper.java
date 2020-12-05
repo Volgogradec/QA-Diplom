@@ -10,11 +10,11 @@ import java.lang.Math;
 public class DataHelper {
 
     public static Card getApprovedCard() {
-        return new Card("4444444444444441", "11", "20", "Dmitry Evdokimov", "123");
+        return new Card("4444444444444441", "12", "22", "Dmitry Evdokimov", "123");
     }
 
     public static Card getDeclinedCard() {
-        return new Card("4444444444444442", "11", "20", "Dmitry Evdokimov", "123");
+        return new Card("4444444444444442", "12", "22", "Dmitry Evdokimov", "123");
     }
 
     public static Card getEmptyCard() {
