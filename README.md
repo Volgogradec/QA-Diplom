@@ -20,10 +20,9 @@
 
 ### Запуск тестового приложения
 1. Запустить MySQL, PostgreSQL, NodeJS через терминал командой:
-```
-docker-compose up
-```
-.
+   ```
+   docker-compose up
+   ```
 1. В новой вкладке терминала запустить тестируемое приложение:
    * Для MySQL: 
    ```
@@ -42,13 +41,13 @@ http://localhost:8080/
 ### Запуск тестов
 В новой вкладке терминала запустить тесты:
 1. Для MySQL: 
-```
-gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app
-```
+   ```
+   gradlew clean test -Ddb.url=jdbc:mysql://localhost:3306/app
+   ```
 1. Для PostgreSQL: 
-```
-gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app
-```
+   ```
+   gradlew clean test -Ddb.url=jdbc:postgresql://localhost:5432/app
+   ```
 
 ### Перезапуск тестов и приложения
 Для остановки приложения в окне терминала нужно ввести команду `Ctrl+С` и повторить необходимые действия из предыдущих разделов.
