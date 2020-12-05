@@ -9,7 +9,8 @@
 
 ## Тестовая документация
 1. [План тестирования](https://github.com/Volgogradec/QA-Diplom/blob/main/documents/Plan.md);
-1. [Отчёт по автоматизации тестирования]()
+1. [Отчёт по итогам тестирования](https://github.com/Volgogradec/QA-Diplom/blob/main/documents/Report.md);
+1. [Отчет по итогам автоматизации](https://github.com/Volgogradec/QA-Diplom/blob/main/documents/Summary.md)
 
 ## Запуск приложения
 ### Подготовительный этап
