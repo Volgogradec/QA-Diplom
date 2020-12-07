@@ -46,3 +46,4 @@ out/
 /.idea/
 /.allure/
 /build (2)/
+.allure
