@@ -44,3 +44,5 @@ out/
 !**/src/main/**
 !**/src/test/**
 /.idea/
+/.allure/
+/build (2)/
