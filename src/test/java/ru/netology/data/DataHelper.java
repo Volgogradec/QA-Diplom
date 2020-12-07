@@ -23,13 +23,11 @@ public class DataHelper {
 
     public static String getShiftedMonth(){
         int shift = (int) (Math.random() * 10);
-        String shiftedMonth;
-        return shiftedMonth = LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
+        return LocalDate.now().plusMonths(shift).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     public static String getShiftedYear(int yearCount){
-        String shiftedYear;
-        return shiftedYear = LocalDate.now().plusYears(yearCount).format(DateTimeFormatter.ofPattern("YY"));
+        return LocalDate.now().plusYears(yearCount).format(DateTimeFormatter.ofPattern("YY"));
     }
 
     public static Card getNumberCard15Symbols() {
