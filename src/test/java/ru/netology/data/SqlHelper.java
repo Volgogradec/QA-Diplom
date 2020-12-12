@@ -13,9 +13,9 @@ public class SqlHelper {
     private static String password = System.getProperty("db.password");
 
     public static void clearDB() {
-        val cleanCreditRequest = "DELETE FROM app.credit_request_entity;";
-        val cleanOrder = "DELETE FROM app.order_entity;";
-        val cleanPayment = "DELETE FROM app.payment_entity;";
+        val cleanCreditRequest = "DELETE FROM credit_request_entity;";
+        val cleanOrder = "DELETE FROM order_entity;";
+        val cleanPayment = "DELETE FROM payment_entity;";
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)) {
             runner.update(conn, cleanCreditRequest);
@@ -27,18 +27,18 @@ public class SqlHelper {
     }
 
     public static String getPaymentStatus() {
-        val codesSQL = "SELECT status FROM app.payment_entity;";
+        val codesSQL = "SELECT status FROM payment_entity;";
         return getData(codesSQL);
     }
 
     public static String getCreditRequestStatus() {
-        val codesSQL = "SELECT status FROM app.credit_request_entity;";
+        val codesSQL = "SELECT status FROM credit_request_entity;";
         return getData(codesSQL);
     }
 
     public static String getOrderCount() {
         Long count = null;
-        val codesSQL = " SELECT COUNT(*) FROM app.order_entity;";
+        val codesSQL = " SELECT COUNT(*) FROM order_entity;";
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)) {
             count = runner.query(conn, codesSQL, new ScalarHandler<>());
