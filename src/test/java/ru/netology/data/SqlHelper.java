@@ -8,9 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SqlHelper {
-    static String url = System.getProperty("db.url");
-    static String user = System.getProperty("db.user");
-    static String password = System.getProperty("db.password");
+    private static String url = System.getProperty("db.url");
+    private static String user = System.getProperty("db.user");
+    private static String password = System.getProperty("db.password");
 
     public static void clearDB() {
         val cleanCreditRequest = "DELETE FROM app.credit_request_entity;";
@@ -48,7 +48,7 @@ public class SqlHelper {
         return Long.toString(count);
     }
 
-    public static String getData(String query) {
+    private static String getData(String query) {
         String data = "";
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)) {
